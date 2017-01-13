@@ -7,6 +7,10 @@ defmodule Enphex.Mixfile do
      elixir: "~> 1.3",
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
+     package: package(),
+     description: "An elixir wrapper for enphase api",
+     source_url: "https://github.com/techgaun/enphex",
+     docs: [extras: ["README.md"]],
      deps: deps()]
   end
 
@@ -29,7 +33,18 @@ defmodule Enphex.Mixfile do
   defp deps do
     [
       {:httpoison, ">= 0.9.0"},
-      {:poison, ">= 1.0.0"}
+      {:poison, ">= 1.0.0"},
+      {:ex_doc, "~> 0.11", only: :dev}
+    ]
+  end
+
+  defp package do
+    [
+      maintainers: [
+        "Samar Acharya"
+      ],
+      licenses: ["Apache-2.0"],
+      links: %{"GitHub" => "https://github.com/techgaun/enphex"}
     ]
   end
 end
