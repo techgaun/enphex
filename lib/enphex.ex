@@ -5,6 +5,8 @@ defmodule Enphex do
   All the API calls defined here follow the [API documentation](https://developer.enphase.com/docs)
   Please refer to the documentation.
 
+  You can pass a map of URL parameters as the `params` value.
+
   Currently, `Enphex` requires you to specify `user_id` in your configuration as the authentication flow
   is not implemented on `Enphex` yet. However, to use as API, this implementation is more than enough.
   """
