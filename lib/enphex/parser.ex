@@ -5,7 +5,7 @@ defmodule Enphex.Parser do
   require Logger
 
   @type status_code :: integer
-  @type response :: {:ok, [struct]} | {:ok, struct} | :ok | {:error, map, status_code} | {:error, map} | any
+  @type response :: {:ok, [struct]} | {:ok, struct} | :ok | {:error, map, status_code} | {:error, map} | {:wait, String.t, pos_integer} | any
 
   @doc """
   Parses the response from auth0 api calls
