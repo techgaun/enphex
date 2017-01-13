@@ -9,6 +9,5 @@ defmodule Enphex.Utils do
   def http_opts, do: Application.get_env(:enphex, :http_opts) || []
   def ua, do: Application.get_env(:enphex, :user_agent) || "Enphex <https://github.com/techgaun/enphex>"
   def req_header, do: [{"User-Agent", ua},
-                       {"Authorization", "Bearer #{mgmt_token}"},
                        {"Accept", "application/json"}]
 end
