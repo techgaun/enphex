@@ -24,6 +24,12 @@ defmodule Enphex.Api do
         do_get(path, Enum.into(params, %{}))
       end
 
+      def auth do
+        auth_url
+        |> HTTPoison.get(req_header, http_opts)
+        |> Parser.parse
+      end
+
       defp do_request(method, path, params \\ %{}, req_body \\ "") do
         uri = build_url(path, params)
         method
