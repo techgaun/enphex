@@ -21,8 +21,8 @@ defmodule Enphex.Parser do
 
       {:ok, %HTTPoison.Response{body: body}, status_code: 409} ->
         %{"period" => period, "period_start" => ps, "period_end" => pe, "limit" => limit} = Poison.decode!(body)
-        Logger.debug "period_start: #{period_start}, limit in period: #{limit}"
-        {:wait, period, period_end}
+        Logger.debug "period_start: #{ps}, limit in period: #{limit}"
+        {:wait, period, pe}
 
       {:ok, %HTTPoison.Response{body: body}, status_code: status} when status in [400, 401, 403, 404, 429] ->
         {:error, Poison.decode!(body)}

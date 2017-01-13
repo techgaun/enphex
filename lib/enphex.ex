@@ -17,7 +17,7 @@ defmodule Enphex do
   end
 
   def inventory(system_id, params \\ %{}) do
-    do_get("systems/#{system_id}/inventory")
+    do_get("systems/#{system_id}/inventory", params)
   end
 
   def monthly_production(system_id, params \\ %{}) do
