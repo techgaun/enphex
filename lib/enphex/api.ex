@@ -11,7 +11,7 @@ defmodule Enphex.Api do
       def build_url(path, params) do
         params =
           params
-          |> Map.put(:api_key, api_key)
+          |> Map.put(:key, api_key)
           |> Map.put(:user_id, user_id)
         "#{base_url}#{path}?#{URI.encode_query(params)}"
       end
