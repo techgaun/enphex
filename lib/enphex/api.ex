@@ -11,9 +11,9 @@ defmodule Enphex.Api do
       def build_url(path, params) do
         params =
           params
-          |> Map.put(:key, api_key)
-          |> Map.put(:user_id, user_id)
-        "#{base_url}#{path}?#{URI.encode_query(params)}"
+          |> Map.put(:key, api_key())
+          |> Map.put(:user_id, user_id())
+        "#{base_url()}#{path}?#{URI.encode_query(params)}"
       end
 
       def do_get(path, params) when is_map(params) do
@@ -25,15 +25,15 @@ defmodule Enphex.Api do
       end
 
       def auth do
-        auth_url
-        |> HTTPoison.get(req_header, http_opts)
+        auth_url()
+        |> HTTPoison.get(req_header(), http_opts())
         |> Parser.parse
       end
 
       defp do_request(method, path, params \\ %{}, req_body \\ "") do
         uri = build_url(path, params)
         method
-        |> HTTPoison.request(uri, req_body, req_header, http_opts)
+        |> HTTPoison.request(uri, req_body, req_header(), http_opts())
         |> Parser.parse
       end
     end

@@ -1,5 +1,7 @@
 # Enphex
 
+[![Hex version](https://img.shields.io/hexpm/v/enphex.svg "Hex version")](https://hex.pm/packages/enphex) ![Hex downloads](https://img.shields.io/hexpm/dt/enphex.svg "Hex downloads")
+
 > An elixir wrapper for enphase api
 
 ## Installation
