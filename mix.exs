@@ -2,16 +2,18 @@ defmodule Enphex.Mixfile do
   use Mix.Project
 
   def project do
-    [app: :enphex,
-     version: "0.1.1",
-     elixir: "~> 1.3",
-     build_embedded: Mix.env == :prod,
-     start_permanent: Mix.env == :prod,
-     package: package(),
-     description: "An elixir wrapper for enphase api",
-     source_url: "https://github.com/techgaun/enphex",
-     docs: [extras: ["README.md"]],
-     deps: deps()]
+    [
+      app: :enphex,
+      version: "0.1.1",
+      elixir: "~> 1.3",
+      build_embedded: Mix.env() == :prod,
+      start_permanent: Mix.env() == :prod,
+      package: package(),
+      description: "An elixir wrapper for enphase api",
+      source_url: "https://github.com/techgaun/enphex",
+      docs: [extras: ["README.md"]],
+      deps: deps()
+    ]
   end
 
   # Configuration for the OTP application

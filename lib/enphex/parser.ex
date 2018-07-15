@@ -5,7 +5,14 @@ defmodule Enphex.Parser do
   require Logger
 
   @type status_code :: integer
-  @type response :: {:ok, [struct]} | {:ok, struct} | :ok | {:error, map, status_code} | {:error, map} | {:wait, String.t, pos_integer} | any
+  @type response ::
+          {:ok, [struct]}
+          | {:ok, struct}
+          | :ok
+          | {:error, map, status_code}
+          | {:error, map}
+          | {:wait, String.t(), pos_integer}
+          | any
 
   @doc """
   Parses the response from auth0 api calls
@@ -13,18 +20,22 @@ defmodule Enphex.Parser do
   @spec parse(tuple) :: response
   def parse(response) do
     case response do
-      {:ok, %HTTPoison.Response{body: body, headers: _, status_code: status}} when status in [200, 201] ->
+      {:ok, %HTTPoison.Response{body: body, headers: _, status_code: status}}
+      when status in [200, 201] ->
         {:ok, Poison.decode!(body)}
 
       {:ok, %HTTPoison.Response{body: _, headers: _, status_code: 204}} ->
         :ok
 
       {:ok, %HTTPoison.Response{body: body}, status_code: 409} ->
-        %{"period" => period, "period_start" => ps, "period_end" => pe, "limit" => limit} = Poison.decode!(body)
-        Logger.debug "period_start: #{ps}, limit in period: #{limit}"
+        %{"period" => period, "period_start" => ps, "period_end" => pe, "limit" => limit} =
+          Poison.decode!(body)
+
+        Logger.debug("period_start: #{ps}, limit in period: #{limit}")
         {:wait, period, pe}
 
-      {:ok, %HTTPoison.Response{body: body}, status_code: status} when status in [400, 401, 403, 404, 429] ->
+      {:ok, %HTTPoison.Response{body: body}, status_code: status}
+      when status in [400, 401, 403, 404, 429] ->
         {:error, Poison.decode!(body)}
 
       {:ok, %HTTPoison.Response{body: body, headers: _, status_code: status}} ->
@@ -32,6 +43,7 @@ defmodule Enphex.Parser do
 
       {:error, %HTTPoison.Error{id: _, reason: reason}} ->
         {:error, %{reason: reason}}
+
       _ ->
         response
     end
